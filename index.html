@@ -114,9 +114,7 @@
     const sqlEditor = CodeMirror.fromTextArea(document.getElementById("sqlEditor"), {
       mode: "text/x-mysql", // or "text/x-sql"
       theme: "dracula", // We'll override the background in CSS
-      lineNumbers: false,
-      styleActiveLine: true,
-      matchBrackets: true,      
+    
       gutters: ["CodeMirror-lint-markers"],
       // Enable auto-hint
       extraKeys: {
