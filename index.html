@@ -24,8 +24,7 @@
 
     /* A container to center our editor and controls */
     .container {
-      width: 90%;
-      max-width: 1000px;
+      width: 100%;
       margin: 2rem auto;
     }
 
@@ -36,7 +35,7 @@
 
     /* CodeMirror styling: override default background/text to fit navy theme */
     .CodeMirror {
-      height: 400px;
+      height: 85%;
       border: 1px solid #444;
       background-color: #ffffff; /* same deep navy */
       color: #000000;
@@ -115,9 +114,7 @@
       theme: "dracula", // We'll override the background in CSS
       lineNumbers: true,
       styleActiveLine: true,
-      matchBrackets: true,
-
-      
+      matchBrackets: true,      
       gutters: ["CodeMirror-lint-markers"],
       // Enable auto-hint
       extraKeys: {
