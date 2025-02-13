@@ -111,19 +111,30 @@
       tablesForHint[tableName].push(columnName);
     });
 
-    // Initialize CodeMirror
     const sqlEditor = CodeMirror.fromTextArea(document.getElementById("sqlEditor"), {
       mode: "text/x-mysql", // or "text/x-sql"
       theme: "dracula", // We'll override the background in CSS
       lineNumbers: false,
       styleActiveLine: true,
-      matchBrackets: true,  
+      matchBrackets: true,
+      gutters: ["CodeMirror-lint-markers"],
       // Enable auto-hint
       extraKeys: {
         "Ctrl-Space": "autocomplete"
       },
       hintOptions: {
-        tables: tablesForHint
+        tables: tablesForHint,
+        completeSingle: true,
+        caseInsensitive: true,
+        triggerOnChar: "."
+      }
+    });
+
+    sqlEditor.on("inputRead", function (cm, event) {
+      const cursor = cm.getCursor();
+      const prevChar = cm.getRange({ line: cursor.line, ch: cursor.ch - 1 }, cursor);
+      if (prevChar === ".") {
+        cm.showHint({ hint: CodeMirror.hint.sql });
       }
     });
 
