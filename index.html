@@ -117,13 +117,22 @@
       theme: "dracula", // We'll override the background in CSS
       lineNumbers: false,
       styleActiveLine: true,
-      matchBrackets: true,  
+      matchBrackets: true,
       // Enable auto-hint
       extraKeys: {
         "Ctrl-Space": "autocomplete"
       },
       hintOptions: {
-        tables: tablesForHint
+        tables: tablesForHint,
+        completeSingle: true
+      }
+    });
+
+    sqlEditor.on("inputRead", function (cm, event) {
+      const cursor = cm.getCursor();
+      const prevChar = cm.getRange({ line: cursor.line, ch: cursor.ch - 1 }, cursor);
+      if (prevChar === ".") {
+        cm.showHint({ hint: CodeMirror.hint.sql });
       }
     });
 
